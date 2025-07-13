@@ -1,0 +1,50 @@
+"""
+1. Split nums into three lists: negative numbers, positive numbers, and zeros
+2. Create a separate set for negatives and positives for O(1) look-up times
+3. If there is a zero, find the positive number that equals to the -1*negative number
+3. if there are more than 3 zeros, put them in the result
+3. Try two negatives and one positive
+3. Try two positives and one negative
+4. Change the set res in to List[List[]], return result
+"""
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        
+        res = set()
+
+        n, p, z = [], [], []
+        for num in nums:
+            if num < 0:
+                n.append(num)
+            elif num > 0:
+                p.append(num)
+            else:
+                z.append(num)
+        
+        N, P = set(n), set(p)
+
+        if z:
+            for num in P:
+                if -1 * num in N:
+                    res.add((-1*num, 0, num))
+        
+        if len(z) >= 3:
+            res.add((0, 0, 0))
+        
+        for i in range(len(n)):
+            for j in range(i + 1, len(n)):
+                target = -1*(n[i] + n[j])
+                if target in P:
+                    res.add(tuple(sorted([n[i], n[j], target])))
+                    # sorted(...) ensures the triplet (a, b, c) is in a consistent order, 
+                    # so that (a, b, c) and (b, a, c) are treated as the same combination.
+                    # tuple(...) converts the list into a tuple because only tuples can be added to a set.
+
+        for i in range(len(p)):
+            for j in range(i + 1, len(p)):
+                target = -1*(p[i] + p[j])
+                if target in N:
+                    res.add(tuple(sorted([p[i], p[j], target])))
+        
+        return [list(t) for t in res]
