@@ -1,0 +1,40 @@
+"""
+head = 1 → 2 → 3 → 4
+
+# Find the mid point:
+1 → 2 → 3 → 4
+    s   f
+1 → 2 → 3 → 4
+        s   f
+slow = 3
+
+# Reverse:
+3 → 4 becomes 4 → 3
+
+# Merge two lists:
+1 → 2 with 4 → 3
+
+1 → 4 → 2 → 3
+"""
+
+class Solution:
+    def reorderList(self, head: ListNode) -> None:
+        if not head:
+            return
+
+        # Find the mid point and use slow to represent the midpoint
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # Reverse the second half of the list
+        prev, curr = None, slow
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+
+        # Merge two lists
+        first, second = head, prev
+        while second.next:
+            first.next, first = second, first.next
+            second.next, second = first, second.next
