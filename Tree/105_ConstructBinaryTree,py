@@ -1,0 +1,38 @@
+"""
+Preorder traversal follows Root -> Left -> Right, therefore, given the preorder array preorder, we have easy access to the root which is preorder[0].
+
+Inorder traversal follows Left -> Root -> Right, therefore if we know the position of Root, we can recursively split the entire array into two subtrees.
+"""
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        
+        def array_to_tree(left, right):
+            # left is the start of the subtree, and right is the end
+            nonlocal preorder_index
+
+            # If there are no elements to contruct the tree
+            if left > right:
+                return None
+            
+            # select the preorder_index element as the root and increment it
+            root_value = preorder[preorder_index]
+            root = TreeNode(root_value) # Create a new TreeNode, whose value is root_value
+            # >> The value I take out from the preorder tree will become the root of subtree
+
+            preorder_index += 1
+
+            # build left and right subtree
+            # Excluding inorder_index_map[root_value] node because it is the root of subtree
+            root.left = array_to_tree(left, inorder_index_map[root_value] - 1)
+            root.right = array_to_tree(inorder_index_map[root_value] + 1, right)
+
+            return root
+        
+        preorder_index = 0
+
+        # build a hashmap to store value -> its index relations
+        inorder_index_map = {}
+        for index, value in enumerate(inorder):
+            inorder_index_map[value] = index
+        
+        return array_to_tree(0, len(preorder) - 1)
