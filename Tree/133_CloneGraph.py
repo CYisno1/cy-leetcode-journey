@@ -1,3 +1,15 @@
+"""
+Time Complexity: O(N+M), where N is a number of nodes (vertices) and M is a number of edges.
+Space Complexity: O(N). This space is occupied by the visited hash map and in addition to that, space would also be occupied by the recursion stack since we are adopting a recursive approach here.
+The space occupied by the recursion stack would be equal to O(H) where H is the height of the graph. Overall, the space complexity would be O(N).
+
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
 from typing import Optional
 
 class Solution:
@@ -18,8 +30,9 @@ class Solution:
         if node in self.visited:
             return self.visited[node]
         
-        # Create a clone for the given node.
+        # Create a new node, which has the same value as nodes of the original graph.
         # We don't have cloned neighbors as of now, so [].
+        # This step only copy the nodes, no links between them.
         clone_node = Node(node.val, [])
 
         # Visited node is key and clone node is value.
