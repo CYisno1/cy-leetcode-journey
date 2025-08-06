@@ -5,6 +5,7 @@ class Solution:
         # Create an array indegree of length n where indegree[x] stores the incoming degree (number of edges entering node x)
         indegree = [0] * numCourses
         # Create an adjacency list adj in which adj[x] contains all the nodes with an incoming edge from node x
+        # adj[x] = [a, b, c] >> x is the prerequisite of a, b, c
         adj = [[] for _ in range(numCourses)]
 
         # We create this adjacency list by iterating over prerequisites
@@ -12,9 +13,10 @@ class Solution:
             adj[prerequisite[1]].append(prerequisite[0])
             indegree[prerequisite[0]] += 1
         
+        # Queue holds the courses with no prerequisite
         queue = deque()
         for i in range(numCourses):
-            if indegree[i] == 0:
+            if indegree[i] == 0: # If indegree == 0 >> no prerequisite
                 queue.append(i)
         
         nodesVisited = 0
