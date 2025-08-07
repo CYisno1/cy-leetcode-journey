@@ -21,8 +21,8 @@ class Solution:
         def bfs(queue):
             reachable = set()
             while queue:
-                (row, col) = queue.popleft()
-                reachable.add((row, col))
+                (row, col) = queue.popleft() # Take out next spot we are gonna deal with
+                reachable.add((row, col)) # Mark this spot as reachable (visited)
                 for (x, y) in [(1, 0), (0, 1), (-1, 0), (0, -1)]: # Check all 4 directions
                     new_row, new_col = row + x, col + y
 
