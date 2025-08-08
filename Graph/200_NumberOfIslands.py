@@ -50,7 +50,7 @@ class Solution:
             for c in range(nc):
                 if grid[r][c] == "1":
                     grid[r][c] = "0"
-                    if r - 1 >= 0 and grid[r - 1][c] == "1": # Check up
+                    if r - 1 >= 0 and grid[r - 1][c] == "1": # Check up (Because unionfind use parent-- a list, so we need to change the 2-d grid into the 1-d list)
                         uf.union(r * nc + c, (r - 1) * nc + c)
                     if r + 1 < nr and grid[r + 1][c] == "1": # Check down
                         uf.union(r * nc + c, (r + 1) * nc + c)
@@ -59,7 +59,7 @@ class Solution:
                     if c + 1 < nc and grid[r][c + 1] == "1": # Check right
                         uf.union(r * nc + c, r * nc + c + 1)
         
-        return uf.getCount()
+        return uf.count
 
                     
     
