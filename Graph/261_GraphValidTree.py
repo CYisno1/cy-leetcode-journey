@@ -2,9 +2,10 @@
 
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        if len(edges) != n - 1:
+        if len(edges) != n - 1:  # Check whether i's a valid tree
             return False
         parent = list(range(n))
+
 
         def find(x):
             if parent[x] != x:
@@ -12,15 +13,14 @@ class Solution:
             return parent[x]
         
         def union(x, y):
-            rootx = find(x)
-            rooty = find(y)
-            if rootx == rooty: # Cycle, return False
-                return False
-            parent[rootx] = rooty
-            return True
+            root_x = find(x)
+            root_y = find(y)
+            if root_x != root_y:
+                parent[root_x] = root_y
         
         for u, v in edges:
-            if not union(u, v):
+            if find(u) == find(v): # Check if there is cycle
                 return False
+            union(u, v)
         
         return True
