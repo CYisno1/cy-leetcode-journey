@@ -47,3 +47,54 @@ class Codec:
         data_list = data.split(',')
         root = rdeserialize(data_list)
         return root
+
+
+"""
+# BFS
+
+from collections import deque
+from typing import Optional
+
+class Codec:
+    def serialize(self, root: Optional[TreeNode]) -> str:
+        if not root:
+            return ""
+        
+        out = []
+        queue = deque([root])
+        while queue:
+            node = queue.popleft()
+            if node:
+                out.append(str(node.val))
+                queue.append(node.left)
+                queue.append(node.right)
+            else:
+                out.append("null")
+        
+        while out and out[-1] == "null":
+            out.pop()
+        return ",".join(out)
+    
+    def deserialize(self, data: str) -> Optional[TreeNode]:
+        if not data:
+            return None
+        val = data.split(",")
+        root = TreeNode(int(val[0]))
+        q = deque([root])
+        i = 1
+
+        while q and i < len(val):
+            node = q.popleft()
+
+            if i < len(val) and val[i] != "null":
+                node.left = TreeNode(int(val[i]))
+                q.append(node.left)
+            i += 1
+
+            if i < len(val) and val[i] != "null":
+                node.right = TreeNode(int(val[i]))
+                q.append(node.right)
+            i += 1
+        
+        return root
+"""
