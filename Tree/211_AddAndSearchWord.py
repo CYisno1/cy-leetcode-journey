@@ -1,0 +1,40 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        
+        for ch in word:
+            if ch not in node:
+                node[ch] = {}
+            node = node[ch]
+        node["$"] = True
+        
+
+    def search(self, word: str) -> bool:
+        # Return if the word is in the data structure
+
+        def search_in_node(word, node) -> bool:
+            for i, ch in enumerate(word):
+                if not ch in node:
+                    if ch ==".":
+                        for x in node:
+                            if x != "$" and search_in_node(word[i + 1:], node[x]):
+                                return True
+                    
+                # If no nodes lead to answer
+                # or the current character != '.'
+                    return False
+
+            # If the character is found
+            # go down to the next level in trie
+                else:
+                    node = node[ch]
+            return "$" in node # If find the complete word, return True; else: False
+    
+        return search_in_node(word, self.trie)
+        
+                                
+        
