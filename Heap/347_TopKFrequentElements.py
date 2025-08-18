@@ -22,3 +22,30 @@ class Solution:
         count = Counter(nums)
 
         return heapq.nlargest(k, count.keys(), key=count.get)
+
+
+
+"""
+250818
+
+import heapq
+from collections import Counter
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        
+        heap = []
+        counter = {}
+        for n in nums:
+            counter[n] = 1 + counter.get(n, 0)
+        
+        for key, val in counter.items():    # key is the number, val is the frequency
+            heapq.heappush(heap, (-val, key)) # bc of min-heap, the val has to be negative; heaptify the number and frequency as tuples
+        
+        res = []
+        while len(res) < k:
+            res.append(heapq.heappop(heap)[1]) # #bc of the negative value, we will pop out the k-most frequent numbers, nd add the key([1]) to the res
+        
+        return res
+
+"""
