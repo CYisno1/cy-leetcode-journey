@@ -4,7 +4,7 @@ Ex.
 nums = [1, 1, 1, 2, 2, 3]
 k = 2
 
-count = {1: 3, 2: 2, 3: 3}
+count = {1: 3, 2: 2, 3: 1}
 
 heapq.nlargest(n, iterable, key=None)
 n: Number of top elements you want to retrieve
