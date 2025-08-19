@@ -26,7 +26,7 @@ class Solution:
 
         for i in range(1, R):
             for j in range(1, C):
-                if not matrix[i][0] or not matrix[0][j]:
+                if not matrix[i][0] or not matrix[0][j]: # if matrix[i][0] == 0 or matrix[0][j] == 0
                     matrix[i][j] = 0
 
         if matrix[0][0] == 0:
