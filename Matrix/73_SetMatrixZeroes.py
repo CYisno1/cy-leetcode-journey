@@ -1,5 +1,5 @@
 """
-Because we cannot ise extra space, so we cannot use two sets to record where is 0.
+Because we cannot use extra space, so we cannot use two sets to record where is 0.
 We use first cells of every columns and rows as flags to mark which cells will later become 0.
 
 The first cell of row and column for the first row and first column is the same >> cell[0][0].
