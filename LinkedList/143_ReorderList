@@ -4,8 +4,8 @@ head = 1 → 2 → 3 → 4
 # Find the mid point:
 1 → 2 → 3 → 4
     s   f
-1 → 2 → 3 → 4
-        s   f
+1 → 2 → 3 → 4   None
+        s        f
 slow = 3
 
 # Reverse:
